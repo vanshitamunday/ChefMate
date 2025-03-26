@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { verifyPassword } from "../lib/supabase_crud";
+import { Link } from "expo-router";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
-}
+
 
 const handleLogin = async () => {
     try {
@@ -25,30 +26,24 @@ const handleLogin = async () => {
     
 };
 
-const handleEmailChange = (text) => {
-    setEmail(text);
+    return (
+        <View>
+            <View>
+                <Text>Email:</Text>
+                <TextInput
+                    placeholder="Enter email"
+                    value={email}
+                    onChangeText={setEmail}/>
+            </View>
+            <View>
+                <Text>Password:</Text>
+                <TextInput
+                placeholder="Enter Password"
+                secureTextEntry={true}
+                value={password} 
+                onChangeText={setPassword}/>
+            </View>
+            <Button title="Login" onPress={handleLogin}/>
+        </View>
+    );
 }
-
-
-return (
-    <View>
-        <View>
-            <Text>Email:</Text>
-            <TextInput
-                type="text"
-                placeholder="Enter email"
-                value={email}
-                onChangeText={handleEmailChange}/>
-        </View>
-        <View>
-            <Text>Password:</Text>
-            <TextInput
-            type="text" 
-            placeholder="Enter Password" 
-            value={password} 
-            onChange={handleLogin}/>
-        </View>
-        <Button title="Login" onPress={handleLogin}/>
-        <Button>Register</Button>
-    </View>
-)
