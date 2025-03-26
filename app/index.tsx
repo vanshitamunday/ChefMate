@@ -1,11 +1,9 @@
-'use client'
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { verifyPassword } from "../lib/supabase_crud";
 import { Link } from "expo-router";
 
-export default function Login() {
+export default function Index() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
