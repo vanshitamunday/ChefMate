@@ -1,47 +1,28 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import { verifyPassword } from "../lib/supabase_crud";
-import { Link } from "expo-router";
+import { Button, View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import Sign_In from "./auth/SignIn";
+import { useState } from "react";
+import Welcome from "./landingPage";
+import { Link, router } from "expo-router";
 
-export default function Index() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string | null>(null);
 
-
-const handleLogin = async () => {
-    try {
-        const passwordMatch = await verifyPassword(email, password);
-        
-        if(passwordMatch) {
-            Alert.alert('Login Successful');
-        } else {
-            Alert.alert('Invalid credentials');
-        } 
-    }catch (error) {
-            console.error('Login error:', error);
-            Alert.alert('Login error');
-        }
-    
-};
-
-    return (
-        <View>
-            <View>
-                <Text>Email:</Text>
-                <TextInput
-                    placeholder="Enter email"
-                    value={email}
-                    onChangeText={setEmail}/>
-            </View>
-            <View>
-                <Text>Password:</Text>
-                <TextInput
-                placeholder="Enter Password"
-                secureTextEntry={true}
-                value={password} 
-                onChangeText={setPassword}/>
-            </View>
-            <Button title="Login" onPress={handleLogin}/>
-        </View>
-    );
+  const handleSignIn = (name: string) => {
+    setUserName(name);
+  };
+  return (
+    <View style={styles.container}>
+      {isSignedIn ? <Welcome userName={userName} /> : <Sign_In setIsSignedIn={setIsSignedIn} onSignInSuccess={handleSignIn} />}
+      
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
