@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import supabase from "../lib/supabase";
+import supabase from "../../lib/supabase";
 const TABLE_NAME = "user_details";
 
 function validateEmail(email: string): boolean {
