@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-// import supabase from "./lib/supabase";
 import supabase from "../../lib/supabase";
 
 type Sign_InProps = { 
@@ -17,7 +16,7 @@ type Sign_InProps = {
   onSignInSuccess: (userName: string) => void;
 };
 
-const image = require("../assets/loginBackground.jpg");
+const image = require("../../assets/logo5.jpg");
 
 function validateEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
